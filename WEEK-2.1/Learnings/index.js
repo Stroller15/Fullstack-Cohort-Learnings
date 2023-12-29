@@ -30,15 +30,39 @@ app.use(bodyParser.json());
 // }
 
 // post
-function response(req, res) {
-    const value = req.body;
-    console.log(req.body)
-    
-    res.send(value.number);
+
+
+
+// function getCalculationMul(val) {
+//     return val * val;
+// }
+
+
+// function getPage(req, res) {
+//     res.sendFile(__dirname + "/index.html")
+// }
+
+// app.get('/', getPage);
+// app.get('/sum', response)
+
+
+
+function getCalculationSum(val) {
+    return val + val;
 }
 
-// app.get('/', response)
-app.post('/', response)
+function handleReq(req, res) {
+    const val = req.query.counter;
+
+    const calculatedSum = getCalculationSum(val)
+
+    const varObject = {
+        sum: calculatedSum,
+    }
+    res.status(200).send(varObject);
+}
+
+app.get('/handle', handleReq)
 
 app.listen(3000, () => {
     console.log('port is started')
